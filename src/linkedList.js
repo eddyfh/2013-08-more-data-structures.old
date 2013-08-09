@@ -9,14 +9,14 @@ var makeLinkedList = function(){
     if (list.tail !== null) {
       list.tail.next = newnode;
       list.tail = newnode;
-    }
-    else {
+    } else {
       list.head = newnode;
       list.tail = newnode;
     }
   };
 
   list.removeHead = function(){
+    //list.head = list.head ? list.head.next : null; Could try using ternary
     if (list.head !== null) 
       list.head = list.head.next;
     if (list.head === null) 
@@ -28,15 +28,19 @@ var makeLinkedList = function(){
     var check = function(checknode) {  
       if (checknode.value === input) {
         found = true;
-      }
-      else if (checknode.next) check(checknode.next);
+      } else if (checknode.next){
+        check(checknode.next);
+      } 
+    };
+    if (list.head) {
+      check(list.head);
     }
-    if (list.head) check(list.head);
     return found;
   };
-
+  
   return list;
 };
+
 
 var makeNode = function(value){
   var node = {};
