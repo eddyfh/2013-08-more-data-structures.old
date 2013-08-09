@@ -23,8 +23,18 @@ var makeLinkedList = function(){
       list.tail = null;
   };
 
-  list.contains = function(){   
+  list.contains = function(input){   
+    var found = false;
+    var check = function(checknode) {  
+      if (checknode.value === input) {
+        found = true;
+      }
+      else if (checknode.next) check(checknode.next);
+    }
+    if (list.head) check(list.head);
+    return found;
   };
+
   return list;
 };
 
