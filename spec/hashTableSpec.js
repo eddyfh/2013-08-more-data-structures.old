@@ -18,10 +18,12 @@ describe("hashTable", function() {
   });
 
   it("should be able to remove items", function() {
+    hashTable.insert('ed', 'dude');
+    hashTable.insert('jen', 'dudette');
     hashTable.remove('ed');
     hashTable.remove('jen');
-    expect(hashTable.retrieve('ed')).toEqual(undefined);
-    expect(hashTable.retrieve('jen')).toEqual(undefined);
+    expect(hashTable.retrieve('ed')).toEqual('Not contained in hash');
+    expect(hashTable.retrieve('jen')).toEqual('Not contained in hash');
   });
 
   it("should handle hash function collisions", function(){
