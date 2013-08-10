@@ -28,10 +28,6 @@ var makeLimitedArray = function(limit){
       callback(storage[i], i, storage);
     }
   };
-  limitedArray.deleter = function(index) {
-    storage[index] = undefined;
-    console.dir(storage);
-  };
 
   var checkLimit = function(index){
     if(typeof index !== 'number'){ throw new Error('setter requires a numeric index for its first argument'); }

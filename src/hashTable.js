@@ -1,5 +1,5 @@
 var HashTable = function(){
-  this._limit = 8;
+  this._limit = 1;
 
   // Use a limited array to store inserted elements.
   // It'll keep you from using too much space. Usage:
@@ -13,17 +13,40 @@ var HashTable = function(){
 };
 
 HashTable.prototype.insert = function(k, v){      // k = user's key, v = user's value
-  var i = getIndexBelowMaxForKey(k, this._limit);
-  console.log('Hash key is '+i);
-  this._storage.set(i, v);
+  var i = getIndexBelowMaxForKey(k, this._limit);  
+  if (this._storage.get(i)) {
+    var result = this._storage.get(i);
+    result[result.length] = [k,v];
+    /*
+    for (index = 0; index < store.length; index++) {
+      if (store[index][1]) {
+        
+      }
+    }
+    */
+    this._storage.set(i, result);
+  } else {
+    this._storage.set(i, [[k,v]]);  
+  }
 };
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  return this._storage.get(i);
+  var silo = this._storage.get(i);
+  // console.log(silo);
+  // console.log(silo.length);
+  // console.log(typeof(silo));
+  for (var index = 0; index < silo.length; index++) {
+    if (silo[index][0] === k) {
+      // CREATE LINK TO REMOVE
+      return silo[index];
+    }
+  }
+
+  return false;
 };
 
-HashTable.prototype.remove = function(k){
+HashTable.prototype.remove = function(k){  // REVISE THIS SO DOESN'T USE DELETER
   var i = getIndexBelowMaxForKey(k, this._limit);
   console.log('Hash key is '+i);
   this._storage.deleter(i);
@@ -33,6 +56,11 @@ HashTable.prototype.remove = function(k){
 // Start by loading those files up and playing with the functions it provides.
 // You don't need to understand how they work, only their interface is important to you
 
+/*
+
+Only insert if 
+
+*/
 
 /*
 
