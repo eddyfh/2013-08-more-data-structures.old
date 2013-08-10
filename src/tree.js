@@ -12,12 +12,6 @@ var extend = function(from, to) {
   }
 };
 
-var makeNode = function(nodevalue) {
-  var node = {};
-  node.value = nodevalue;
-  return node;
-}
-
 var treeMethods = {};
 
 treeMethods.addChild = function(childVal){
@@ -25,20 +19,30 @@ treeMethods.addChild = function(childVal){
   this.children.push(newnode);
 };
 
+//treeMethods.
+
+
+/*
+var makeNode = function(nodevalue) {
+  var node = {};
+  node.value = nodevalue;
+  return node;
+}
+
 treeMethods.contains = function(contVal){
-  var found = false;
+  //var found = false;
   var checkfunc = function(checknode) { // recursive function
     if (checknode.value === contVal) { 	// check for match
-      found = true;
+      return true;
     }
     if (checknode.children) {			// if there're children, run checkfunc for each child
       for (var childIndex = 0; childIndex < checknode.children.length; childIndex++) {
-        checkfunc(checknode.children[childIndex]);
+        debugger
+        return false || checkfunc(checknode.children[childIndex]);
       }
     }
+    return false;
   }
   checkfunc(this); // initial call to run on the newTree object
-  return found;
 };
-
-// SHOULD TRY USING RECURSION
+*/

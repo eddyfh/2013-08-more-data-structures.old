@@ -61,6 +61,28 @@ var makeLinkedList = function(){
     return undefined;
   };
 
+  list.contains = function(input) {
+    return list.tail && list.tail.contains(input);  
+  };
+
+  return list;
+};
+
+var makeNode = function(value){
+  var node = {};
+  node.value = value;
+  node.next = null;
+  node.prev = null;
+
+  node.contains = function(value) {
+    return node.value === value || node.next && node.next.contains(value);
+  };
+
+  return node;
+};
+
+
+/* OLD IMPLEMENTATION OF CONTAINS & node
   list.contains = function(input){   
     var found = false;
     var check = function(checknode) {  
@@ -75,10 +97,6 @@ var makeLinkedList = function(){
     }
     return found;
   };
-  
-  return list;
-};
-
 
 var makeNode = function(value){
   var node = {};
@@ -88,6 +106,7 @@ var makeNode = function(value){
   return node;
 };
 
+  */
 
 /*
 
