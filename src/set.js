@@ -1,4 +1,4 @@
-var makeSet = function(){
+var makeSet = function(){       // TRY TO SOLVE USING ARRAY
   this._storage = {};
   this._size = -1;
 };

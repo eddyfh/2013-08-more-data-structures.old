@@ -37,15 +37,13 @@ HashTable.prototype.retrieve = function(k){
       return result[0][1];
     }
   }
-  return 'Not contained in hash';
+  return undefined;
 };
 
 HashTable.prototype.remove = function(k){  
   var i = getIndexBelowMaxForKey(k, this._limit);
   var silo = this._storage.get(i);
-  if (!silo) {
-    return 'Sorry, no items in the hash';
-  } else {
+  if (silo) {
     for (var index = 0; index < silo.length; index++) {
       if (silo[index][0] === k) {
         result = silo.splice(index,1);
@@ -54,7 +52,7 @@ HashTable.prototype.remove = function(k){
       }
     }
   }
-  return 'Not contained in hash';
+  return undefined;
 };
 
 // NOTE: For this code to work, you will NEED the code from hashTableHelpers.js

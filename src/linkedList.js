@@ -1,26 +1,64 @@
 // Note: don't use an array to do this.
+/* HEAD HAS OLDEST ITEMS - DOES NOT POINT TO ANYTHING
+TAIL HAS NEWEST ITEMS - POINTS TO PREV OLDEST ITEM*/
+
 var makeLinkedList = function(){
   var list = {};
   list.head = null;
   list.tail = null;
 
   list.addToTail = function(input){
-    var newnode = makeNode(input);
-    if (list.tail !== null) {
-      list.tail.next = newnode;
-      list.tail = newnode;
+    var newnode = makeNode(input);  // creates new node object with input = value
+    if (list.tail) {                // if there are already nodes
+      var oldtail = list.tail;
+      oldtail.prev = newnode;
+      newnode.next = oldtail;
     } else {
       list.head = newnode;
+    }
+    list.tail = newnode;
+
+    /*  OLD
+
+    list.tail ? list.tail.next = newnode : list.head = newnode;
+    list.tail = newnode;
+    if (list.tail) {              // IF LIST HAS ITEMS
+      list.tail = newnode;
+    } else {                      // IF LIST HAD NO ITEMS
       list.tail = newnode;
     }
+    */
   };
 
   list.removeHead = function(){
-    //list.head = list.head ? list.head.next : null; Could try using ternary
-    if (list.head !== null) 
+    if (list.head) {                    // if there's already nodes
+      var result = list.head;
+      if (list.head.prev) {             // if there're multiple nodes
+        list.head = list.head.prev;
+        list.head.next = null; 
+      } else {                          // single nodes
+        list.head = null;
+        list.tail = null;
+      }
+      return result.value;
+    }
+    return undefined;
+    
+/*
+    var result = list.head;
+    if (list.head) {
       list.head = list.head.next;
-    if (list.head === null) 
+    }
+    return list.head;
+    
+    (list.head) ? list.head = list.head.next : list.tail = null;
+    if (list.head) {
+      list.head = list.head.next;
+      
+    } else {
       list.tail = null;
+    }
+    */
   };
 
   list.contains = function(input){   
@@ -32,8 +70,8 @@ var makeLinkedList = function(){
         check(checknode.next);
       } 
     };
-    if (list.head) {
-      check(list.head);
+    if (list.tail) {
+      check(list.tail);
     }
     return found;
   };
@@ -46,7 +84,7 @@ var makeNode = function(value){
   var node = {};
   node.value = value;
   node.next = null;
-
+  node.previous = null;
   return node;
 };
 

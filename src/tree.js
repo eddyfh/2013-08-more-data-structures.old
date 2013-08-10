@@ -40,3 +40,5 @@ treeMethods.contains = function(contVal){
   checkfunc(this); // initial call to run on the newTree object
   return found;
 };
+
+// SHOULD TRY USING RECURSION

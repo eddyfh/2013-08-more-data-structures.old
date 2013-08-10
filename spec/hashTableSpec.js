@@ -22,8 +22,8 @@ describe("hashTable", function() {
     hashTable.insert('jen', 'dudette');
     hashTable.remove('ed');
     hashTable.remove('jen');
-    expect(hashTable.retrieve('ed')).toEqual('Not contained in hash');
-    expect(hashTable.retrieve('jen')).toEqual('Not contained in hash');
+    expect(hashTable.retrieve('ed')).toEqual(undefined);
+    expect(hashTable.retrieve('jen')).toEqual(undefined);
   });
 
   it("should handle hash function collisions", function(){
