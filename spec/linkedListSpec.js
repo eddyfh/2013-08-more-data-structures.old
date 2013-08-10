@@ -20,6 +20,11 @@ describe("linkedList", function() {
     linkedList.addToTail('first');
     linkedList.addToTail('second');
     linkedList.addToTail('third');    
+  
+  it("should be able to add items using addToHead without errors", function() {
+    linkedList.addToHead('first');
+    linkedList.addToHead('second');
+    linkedList.addToHead('third');    
   });
 
   it("should be able to check if an item is contained in the list", function() {
@@ -52,6 +57,12 @@ describe("linkedList", function() {
     expect(linkedList.contains('first')).toEqual(false);
   });
 
+  it("items should have prev and next values", function() {
+    linkedList.addToTail('first');
+    linkedList.addToTail('second');
+    expect(linkedList.tail.next.value).toEqual('first');
+    expect(linkedList.head.prev.value).toEqual('second');
+  });
 
   // add more tests here to test the functionality of linkedList
 });

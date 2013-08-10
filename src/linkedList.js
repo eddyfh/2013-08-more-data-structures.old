@@ -17,17 +17,18 @@ var makeLinkedList = function(){
       list.head = newnode;
     }
     list.tail = newnode;
+  };
 
-    /*  OLD
-
-    list.tail ? list.tail.next = newnode : list.head = newnode;
-    list.tail = newnode;
-    if (list.tail) {              // IF LIST HAS ITEMS
-      list.tail = newnode;
-    } else {                      // IF LIST HAD NO ITEMS
+  list.addToHead = function(input) {
+    var newnode = makeNode(input);
+    if (list.tail) {
+      var oldhead = list.head;
+      oldhead.next = newnode;
+      newnode.prev = oldhead;
+    } else {
       list.tail = newnode;
     }
-    */
+    list.head = newnode;
   };
 
   list.removeHead = function(){
@@ -43,22 +44,21 @@ var makeLinkedList = function(){
       return result.value;
     }
     return undefined;
-    
-/*
-    var result = list.head;
-    if (list.head) {
-      list.head = list.head.next;
+  };
+
+  list.removeTail = function() {
+    if (list.tail) {
+      var result = list.tail;
+      if (list.tail.next) {
+        list.tail = list.tail.next;
+        list.tail.prev = null;
+      } else {
+        list.tail = null;
+        list.head = null;
+      }
+      return result.value;
     }
-    return list.head;
-    
-    (list.head) ? list.head = list.head.next : list.tail = null;
-    if (list.head) {
-      list.head = list.head.next;
-      
-    } else {
-      list.tail = null;
-    }
-    */
+    return undefined;
   };
 
   list.contains = function(input){   
@@ -84,7 +84,7 @@ var makeNode = function(value){
   var node = {};
   node.value = value;
   node.next = null;
-  node.previous = null;
+  node.prev = null;
   return node;
 };
 
