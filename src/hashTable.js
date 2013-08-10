@@ -14,21 +14,23 @@ var HashTable = function(){
 
 HashTable.prototype.insert = function(k, v){      // k = user's key, v = user's value
   var i = getIndexBelowMaxForKey(k, this._limit);  
-  if (this._storage.get(i)) {
+  var result = this._storage.get(i) || [];
+  result.push([k,v]);
+  this._storage.set(i, result);
+/*
+  if (this._storage.get(i)) {               // old version
     var result = this._storage.get(i);
-    result[result.length] = [k,v];
+    result.push([k,v]);
     this._storage.set(i, result);
   } else {
     this._storage.set(i, [[k,v]]);  
   }
+*/
 };
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
   var silo = this._storage.get(i);
-  // console.log(silo);
-  // console.log(silo.length);
-  // console.log(typeof(silo));
   for (var index = 0; index < silo.length; index++) {
     if (silo[index][0] === k) {
       result = silo.slice(index,index+1);
@@ -38,7 +40,7 @@ HashTable.prototype.retrieve = function(k){
   return 'Not contained in hash';
 };
 
-HashTable.prototype.remove = function(k){  // REVISE THIS SO DOESN'T USE DELETER
+HashTable.prototype.remove = function(k){  
   var i = getIndexBelowMaxForKey(k, this._limit);
   var silo = this._storage.get(i);
   if (!silo) {
