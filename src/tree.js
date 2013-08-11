@@ -2,7 +2,7 @@ var makeTree = function(){
   var newTree = {};
   extend(treeMethods, newTree);
   newTree.value = undefined;
-  newTree.children = []; // contains subtrees
+  newTree.children = undefined; // contains subtrees
   return newTree;
 };
 
@@ -16,6 +16,7 @@ var treeMethods = {};
 
 treeMethods.addChild = function(childVal){
   var newnode = makeNode(childVal);
+  this.children = this.children || [];    // if there aren't children, create empty array
   this.children.push(newnode);
 };
 
