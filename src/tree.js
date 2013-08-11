@@ -1,7 +1,7 @@
 var makeTree = function(){
   var newTree = {};
   extend(treeMethods, newTree);
-  newTree.value = 'replace this';
+  newTree.value = undefined;
   newTree.children = []; // contains subtrees
   return newTree;
 };
@@ -19,8 +19,54 @@ treeMethods.addChild = function(childVal){
   this.children.push(newnode);
 };
 
-//treeMethods.
+treeMethods.contains = function(input){
+  if (this.value === input) {
+    return true;
+  } else if (this.children) {
+    for (var child = 0; child < this.children.length; child++) {
+      if (this.children[child].contains(input)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
+};
+
+// PREVIOUS VERSIONS:
+
+/*
+var found = false;
+  if (this.value === input) {
+    return true;
+  } else if (this.children) {
+    for (var child = 0; child < this.children.length; child++) {
+      if (this.children[child].contains(input)) {
+        found = true;
+      }
+    }
+    return found;
+  }
+
+  if (this.children) {
+    for (var child = 0; child < this.children.length; child++) {
+      return this.children[child].value === input || this.children[child].contains(input);
+    }
+  } else {
+    return this.value === input;
+  }
+
+  
+  if (this.value && this.value === input) {
+    return true;
+  } else {
+    if (this.children) {
+      for (var child = 0; child < this.children.length; child++) {
+        return this.children[child].contains(input);
+      }
+    }
+  } 
+  */ 
 
 /*
 var makeNode = function(nodevalue) {

@@ -8,11 +8,16 @@ describe("tree", function() {
 
   it("should be able to add a child", function() {
     expect(tree.children[0].value).toEqual('newkid');
+    tree.addChild('newkid2');
+    expect(tree.children[1].value).toEqual('newkid2');
   });
 
   it("should be able to run 'contains' on matching and non-matching values", function() {
+    tree.addChild('newkid2');
     expect(tree.contains('newkid')).toEqual(true);
-    expect(tree.contains('blah')).toEqual(false);
+    expect(tree.contains('blah')).toEqual(false);    
+    expect(tree.contains('newkid2')).toEqual(true);
+    expect(tree.contains('blahblah')).toEqual(false);
   });
 
   it("should have methods named 'addChild' and 'contains', and a property named 'value'", function() {
@@ -21,5 +26,4 @@ describe("tree", function() {
     expect('value' in tree).toBe(true);
   });
 
-  // Add more tests here to test the functionality of tree.
 });
