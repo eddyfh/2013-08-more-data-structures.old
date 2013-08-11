@@ -1,4 +1,4 @@
-var makeSet = function(){       // TRY TO SOLVE USING ARRAY
+var makeSet = function(){     
   this._storage = [];
   this._size = -1;
 };
@@ -8,12 +8,7 @@ makeSet.prototype.add = function(addIn){
     this._size++;
     this._storage.push(addIn);
   }
-  /*
-  if (!this.contains(addIn)) {
-    this._size++;
-    this._storage[this._size] = addIn;
-  }
-  */
+
 };
 
 makeSet.prototype.contains = function(query){
@@ -23,19 +18,33 @@ makeSet.prototype.contains = function(query){
     }
   }
   return false;
+};
+
+makeSet.prototype.remove = function(query){
+  var result;
+  for (var index = 0; index < this._storage.length; index++) {
+    if (this._storage[index] === query) {
+      result = [index, this._storage[index]];
+      this._storage = this._storage.splice(index,1);
+    }
+  }
+};
+
+  /*
+  if (!this.contains(addIn)) {
+    this._size++;
+    this._storage[this._size] = addIn;
+  }
+  */
 /*
   var found = false;
   for (var key in this._storage) {
-  	if (this._storage[key] === query) {
-  	  found = true;
-  	}
+    if (this._storage[key] === query) {
+      found = true;
+    }
   }
   return found;
 */
-};
-
-// WAS IN THE MIDDLE OF CLEANING THIS UP, THEN PULLED AWAY FOR A BREAKOUT TO TALK ABOUT 
-// PRE-COURSE MESSAGING
 
 /*
 makeSet.prototype.remove = function(query){
