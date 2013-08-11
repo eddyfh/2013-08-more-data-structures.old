@@ -9,7 +9,7 @@ var makeLinkedList = function(){
 
   list.addToTail = function(input){
     var newnode = makeNode(input);  // creates new node object with input = value
-    if (list.tail) {                // if there are already nodes
+    if (list.tail) {                // if there are already nodes make appropriate changes
       var oldtail = list.tail;
       oldtail.prev = newnode;
       newnode.next = oldtail;
@@ -62,7 +62,7 @@ var makeLinkedList = function(){
   };
 
   list.contains = function(input) {
-    return list.tail && list.tail.contains(input);  
+    return list.tail && list.tail.contains(input);  // starts checking nodes
   };
 
   return list;
@@ -74,7 +74,7 @@ var makeNode = function(value){
   node.next = null;
   node.prev = null;
 
-  node.contains = function(value) {
+  node.contains = function(value) {   // uses recursion method for node to check neighbors
     return node.value === value || node.next && node.next.contains(value);
   };
 
